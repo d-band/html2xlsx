@@ -44,9 +44,13 @@ htmlTo(`
       <td>world</td>
     </tr>
   </table>
-`).saveAs()
-  .pipe(fs.createWriteStream('test.xlsx'))
-  .on('finish', () => console.log('Done.'));
+`, (err, file) => {
+  if (err) return console.error(err);
+  
+  file.saveAs()
+    .pipe(fs.createWriteStream('test.xlsx'))
+    .on('finish', () => console.log('Done.'));
+});
 ```
 
 ## Report a issue
