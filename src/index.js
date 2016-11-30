@@ -1,24 +1,27 @@
 import xlsx from 'better-xlsx';
+import juice from 'juice';
+import cheerio from 'cheerio';
 
-module.exports = (html) => {
-  const file = new xlsx.File();
+module.exports = (html, callback, options = {}) => {
+  juice.juiceResources(html, options.juice || {}, (err, text) => {
+    if (err) return callback(err);
 
-  const sheet = file.addSheet('Sheet1');
-  const row = sheet.addRow();
-  const cell = row.addCell();
+    const file = new xlsx.File();
+    const $ = cheerio.load(text);
 
-  cell.value = 'I am a cell!';
-  cell.hMerge = 2;
-  cell.vMerge = 1;
+    let index = 1;
+    $('table').each((ti, table) => {
+      const sheet = file.addSheet(`Sheet${index}`);
+      $('tr', table).each((hi, th) => {
+        const row = sheet.addRow();
+        $('th, td', th).each((di, td) => {
+          const cell = row.addCell();
+          cell.value = $(td).text();
+        });
+      });
+      index++;
+    });
 
-  const style = new xlsx.Style();
-
-  style.fill.patternType = 'solid';
-  style.fill.fgColor = '00FF0000';
-  style.fill.bgColor = 'FF000000';
-  style.align.h = 'center';
-  style.align.v = 'center';
-
-  cell.style = style;
-  return file;
+    callback(null, file);
+  });
 };
