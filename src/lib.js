@@ -17,19 +17,19 @@ export function size2pt (s) {
 export function size2px (s) {
   if (!s) return 0;
 
-  const pt = s.match(/(\d+)pt/i);
+  const pt = s.match(/([.\d]+)pt/i);
   if (pt && pt.length === 2) {
     return parseFloat(pt[1]) * 96 / 72;
   }
-  const em = s.match(/(\d+)em/i);
+  const em = s.match(/([.\d]+)em/i);
   if (em && em.length === 2) {
     return parseFloat(em[1]) * 16;
   }
-  const px = s.match(/(\d+)px/i);
+  const px = s.match(/([.\d]+)px/i);
   if (px && px.length === 2) {
     return parseFloat(px[1]);
   }
-  const pe = s.match(/(\d+)%/i);
+  const pe = s.match(/([.\d]+)%/i);
   if (pe && pe.length === 2) {
     return (parseFloat(pe[1]) / 100) * 16;
   }

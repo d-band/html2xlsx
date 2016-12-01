@@ -13,18 +13,38 @@ module.exports = (html, callback, options = {}) => {
     let index = 1;
     $('table').each((ti, table) => {
       const sheet = file.addSheet(`Sheet${index}`);
+      const maxW = [];
       $('tr', table).each((hi, th) => {
         const row = sheet.addRow();
+        let maxH = 20; // pt
         $('th, td', th).each((di, td) => {
           const $td = $(td);
           const cell = row.addCell();
           const css = css2style($td.css());
 
-          cell.value = $td.text();
+          cell.value = $td.text().trim();
+
+          const fsize = size2pt(css.fontSize);
+          // Row Height & Col Width
+          if (css.height) {
+            const pt = size2pt(css.height);
+            if (pt > maxH) {
+              maxH = pt;
+            }
+          }
+          if (css.width) {
+            if (!maxW[di]) {
+              maxW[di] = 10;
+            }
+            const tmp = size2pt(css.width) / fsize;
+            if (maxW[di] < tmp) {
+              maxW[di] = tmp;
+            }
+          }
           const style = new xlsx.Style();
           // Font
           style.font.color = color2argb(css.color || '#000');
-          style.font.size = size2pt(css.fontSize);
+          style.font.size = fsize;
           style.font.name = css.fontFamily || 'Verdana';
           style.font.bold = css.fontWeight === 'bold';
           style.font.italic = css.fontStyle === 'italic';
@@ -76,7 +96,15 @@ module.exports = (html, callback, options = {}) => {
           }
           cell.style = style;
         });
+        row.setHeightCM(maxH * 0.03528);
       });
+      // Set col width
+      for (let i = 0; i < maxW.length; i++) {
+        const w = maxW[i];
+        if (w) {
+          sheet.col(i).width = w;
+        }
+      }
       index++;
     });
 
