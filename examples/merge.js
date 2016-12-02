@@ -9,14 +9,14 @@ htmlTo(`
       <td colspan="2">world</td>
     </tr>
     <tr>
-      <td rowspan="2">adsfasdfasd</td>
-      <td>adsfasdfasd</td>
-      <td>adsfasdfasd</td>
-      <td>adsfasdfasd</td>
+      <td rowspan="2">foo</td>
+      <td>bar</td>
+      <td>ok</td>
+      <td>haha</td>
     </tr>
     <tr>
-      <td colspan="3">fadsasdf</td>
-      <td colspan="1">fadsasdf</td>
+      <td colspan="3">foo foo</td>
+      <td colspan="1">bar bar</td>
     </tr>
   </table>
 `, (err, file) => {
