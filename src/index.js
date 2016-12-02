@@ -14,22 +14,30 @@ module.exports = (html, callback, options = {}) => {
     $('table').each((ti, table) => {
       const sheet = file.addSheet(`Sheet${index}`);
       const maxW = [];
+      const offsets = [];
       $('tr', table).each((hi, th) => {
-        const row = sheet.addRow();
+        if (offsets[hi] === undefined) {
+          offsets[hi] = 0;
+        }
         let maxH = 20; // pt
         $('th, td', th).each((di, td) => {
           const $td = $(td);
-          const cell = row.addCell();
+          const rs = parseInt($td.attr('rowspan'), 10) || 1;
+          const cs = parseInt($td.attr('colspan'), 10) || 1;
+
+          for (let r = 0; r < rs; r++) {
+            for (let c = 0; c < cs; c++) {
+              sheet.cell(hi + r, offsets[hi] + c);
+            }
+          }
+
           const css = css2style($td.css());
-
-          cell.value = $td.text().trim();
-
           const fsize = size2pt(css.fontSize);
           // Row Height & Col Width
           if (css.height) {
             const pt = size2pt(css.height);
             if (pt > maxH) {
-              maxH = pt;
+              maxH = pt / rs;
             }
           }
           if (css.width) {
@@ -38,7 +46,7 @@ module.exports = (html, callback, options = {}) => {
             }
             const tmp = size2pt(css.width) / fsize;
             if (maxW[di] < tmp) {
-              maxW[di] = tmp;
+              maxW[di] = tmp / cs;
             }
           }
           const style = new xlsx.Style();
@@ -94,9 +102,26 @@ module.exports = (html, callback, options = {}) => {
           if (css.verticalAlign && vMap[css.verticalAlign]) {
             style.align.v = vMap[css.verticalAlign];
           }
+          // Cell
+          const cell = sheet.cell(hi, offsets[hi]);
+          cell.value = $td.text().trim();
           cell.style = style;
+
+          if (rs > 1) {
+            cell.vMerge = rs - 1;
+          }
+          if (cs > 1) {
+            cell.hMerge = cs - 1;
+          }
+
+          for (let r = 0; r < rs; r++) {
+            if (offsets[hi + r] === undefined) {
+              offsets[hi + r] = 0;
+            }
+            offsets[hi + r] += cs;
+          }
         });
-        row.setHeightCM(maxH * 0.03528);
+        sheet.rows[hi].setHeightCM(maxH * 0.03528);
       });
       // Set col width
       for (let i = 0; i < maxW.length; i++) {
