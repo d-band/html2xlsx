@@ -10,9 +10,8 @@ module.exports = (html, callback, options = {}) => {
     const file = new xlsx.File();
     const $ = cheerio.load(text);
 
-    let index = 1;
     $('table').each((ti, table) => {
-      const sheet = file.addSheet(`Sheet${index}`);
+      const sheet = file.addSheet(`Sheet${ti + 1}`);
       const maxW = [];
       const offsets = [];
       $('tr', table).each((hi, th) => {
@@ -130,7 +129,6 @@ module.exports = (html, callback, options = {}) => {
           sheet.col(i).width = w;
         }
       }
-      index++;
     });
 
     callback(null, file);
