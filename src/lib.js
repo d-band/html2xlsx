@@ -19,19 +19,19 @@ export function size2px (s) {
 
   const pt = s.match(/([.\d]+)pt/i);
   if (pt && pt.length === 2) {
-    return parseFloat(pt[1]) * 96 / 72;
+    return parseFloat(pt[1], 10) * 96 / 72;
   }
   const em = s.match(/([.\d]+)em/i);
   if (em && em.length === 2) {
-    return parseFloat(em[1]) * 16;
+    return parseFloat(em[1], 10) * 16;
   }
   const px = s.match(/([.\d]+)px/i);
   if (px && px.length === 2) {
-    return parseFloat(px[1]);
+    return parseFloat(px[1], 10);
   }
   const pe = s.match(/([.\d]+)%/i);
   if (pe && pe.length === 2) {
-    return (parseFloat(pe[1]) / 100) * 16;
+    return (parseFloat(pe[1], 10) / 100) * 16;
   }
   return 0;
 }

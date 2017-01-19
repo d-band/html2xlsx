@@ -1,6 +1,7 @@
 import xlsx from 'better-xlsx';
 import juice from 'juice';
 import cheerio from 'cheerio';
+import moment from 'moment';
 import { color2argb, size2pt, css2style, getBorder } from './lib';
 
 module.exports = (html, callback, options = {}) => {
@@ -103,7 +104,28 @@ module.exports = (html, callback, options = {}) => {
           }
           // Cell
           const cell = sheet.cell(hi, offsets[hi]);
-          cell.value = $td.text().trim();
+          // Set value type
+          const text = $td.text().trim();
+          const type = $td.attr('type') || $td.attr('data-type') || '';
+          switch (type.toLowerCase()) {
+            case 'number':
+              cell.setNumber(text);
+              break;
+            case 'bool':
+              cell.setBool(text === 'true' || text === '1');
+              break;
+            case 'formula':
+              cell.setFormula(text);
+              break;
+            case 'date':
+              cell.setDate(moment(text).toDate());
+              break;
+            case 'datetime':
+              cell.setDateTime(moment(text).toDate());
+              break;
+            default:
+              cell.value = text;
+          }
           cell.style = style;
 
           if (rs > 1) {

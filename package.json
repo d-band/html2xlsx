@@ -1,6 +1,6 @@
 {
   "name": "html2xlsx",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Transform html to excel (just support xlsx)",
   "main": "lib/index.js",
   "scripts": {
@@ -68,6 +68,7 @@
     "cheerio": "^0.22.0",
     "cssstyle": "^0.2.37",
     "juice": "^4.0.2",
+    "moment": "^2.17.1",
     "tinycolor2": "^1.4.1"
   }
 }
