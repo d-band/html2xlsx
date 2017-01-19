@@ -331,7 +331,6 @@ describe('Test: index.js', () => {
       if (err) return done(err);
 
       const tmpfile = join(tmpdir(), 'datatype.xlsx');
-      console.log(tmpfile);
       const expfile = join(__dirname, 'expect/datatype.xlsx');
       file
         .saveAs()
