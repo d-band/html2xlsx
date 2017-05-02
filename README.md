@@ -1,6 +1,8 @@
 html2xlsx
 ===========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/d-band/html2xlsx.svg)](https://greenkeeper.io/)
+
 > Transform html to excel (just support xlsx)
 
 [![NPM version](https://img.shields.io/npm/v/html2xlsx.svg)](https://www.npmjs.com/package/html2xlsx)
