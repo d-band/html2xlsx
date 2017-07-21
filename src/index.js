@@ -12,7 +12,8 @@ module.exports = (html, callback, options = {}) => {
     const $ = cheerio.load(text);
 
     $('table').each((ti, table) => {
-      const sheet = file.addSheet(`Sheet${ti + 1}`);
+      const name = $(table).attr('name') || `Sheet${ti + 1}`;
+      const sheet = file.addSheet(name);
       const maxW = [];
       const offsets = [];
       $('tr', table).each((hi, th) => {

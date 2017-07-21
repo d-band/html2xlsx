@@ -27,7 +27,7 @@ describe('Test: index.js', () => {
           border: 1px solid #eee;
         }
       </style>
-      <table>
+      <table name="Sheet1">
         <tr>
           <td>foo</td>
           <td>bar</td>
@@ -48,23 +48,23 @@ describe('Test: index.js', () => {
         </tr>
       </table>
     `, (err, file) => {
-      if (err) return done(err);
+        if (err) return done(err);
 
-      const tmpfile = join(tmpdir(), 'simple.xlsx');
-      const expfile = join(__dirname, 'expect/simple.xlsx');
-      file
-        .saveAs()
-        .pipe(fs.createWriteStream(tmpfile))
-        .on('finish', () => {
-          const expectFile = fs.createReadStream(expfile);
-          const actualFile = fs.createReadStream(tmpfile);
-          streamEqual(expectFile, actualFile, function (err, ok) {
-            expect(err).to.be.null;
-            expect(ok).to.be.true;
-            done();
+        const tmpfile = join(tmpdir(), 'simple.xlsx');
+        const expfile = join(__dirname, 'expect/simple.xlsx');
+        file
+          .saveAs()
+          .pipe(fs.createWriteStream(tmpfile))
+          .on('finish', () => {
+            const expectFile = fs.createReadStream(expfile);
+            const actualFile = fs.createReadStream(tmpfile);
+            streamEqual(expectFile, actualFile, function (err, ok) {
+              expect(err).to.be.null;
+              expect(ok).to.be.true;
+              done();
+            });
           });
-        });
-    });
+      });
   });
 
   it('should htmlToXlsx complex ok', (done) => {
@@ -233,23 +233,23 @@ describe('Test: index.js', () => {
         </tbody>
       </table>
     `, (err, file) => {
-      if (err) return done(err);
+        if (err) return done(err);
 
-      const tmpfile = join(tmpdir(), 'complex.xlsx');
-      const expfile = join(__dirname, 'expect/complex.xlsx');
-      file
-        .saveAs()
-        .pipe(fs.createWriteStream(tmpfile))
-        .on('finish', () => {
-          const expectFile = fs.createReadStream(expfile);
-          const actualFile = fs.createReadStream(tmpfile);
-          streamEqual(expectFile, actualFile, function (err, ok) {
-            expect(err).to.be.null;
-            expect(ok).to.be.true;
-            done();
+        const tmpfile = join(tmpdir(), 'complex.xlsx');
+        const expfile = join(__dirname, 'expect/complex.xlsx');
+        file
+          .saveAs()
+          .pipe(fs.createWriteStream(tmpfile))
+          .on('finish', () => {
+            const expectFile = fs.createReadStream(expfile);
+            const actualFile = fs.createReadStream(tmpfile);
+            streamEqual(expectFile, actualFile, function (err, ok) {
+              expect(err).to.be.null;
+              expect(ok).to.be.true;
+              done();
+            });
           });
-        });
-    });
+      });
   });
 
   it('should htmlToXlsx merge ok', (done) => {
@@ -272,23 +272,23 @@ describe('Test: index.js', () => {
         </tr>
       </table>
     `, (err, file) => {
-      if (err) return done(err);
+        if (err) return done(err);
 
-      const tmpfile = join(tmpdir(), 'merge.xlsx');
-      const expfile = join(__dirname, 'expect/merge.xlsx');
-      file
-        .saveAs()
-        .pipe(fs.createWriteStream(tmpfile))
-        .on('finish', () => {
-          const expectFile = fs.createReadStream(expfile);
-          const actualFile = fs.createReadStream(tmpfile);
-          streamEqual(expectFile, actualFile, function (err, ok) {
-            expect(err).to.be.null;
-            expect(ok).to.be.true;
-            done();
+        const tmpfile = join(tmpdir(), 'merge.xlsx');
+        const expfile = join(__dirname, 'expect/merge.xlsx');
+        file
+          .saveAs()
+          .pipe(fs.createWriteStream(tmpfile))
+          .on('finish', () => {
+            const expectFile = fs.createReadStream(expfile);
+            const actualFile = fs.createReadStream(tmpfile);
+            streamEqual(expectFile, actualFile, function (err, ok) {
+              expect(err).to.be.null;
+              expect(ok).to.be.true;
+              done();
+            });
           });
-        });
-    });
+      });
   });
 
   it('should htmlToXlsx data type ok', (done) => {
@@ -328,22 +328,22 @@ describe('Test: index.js', () => {
         </tr>
       </table>
     `, (err, file) => {
-      if (err) return done(err);
+        if (err) return done(err);
 
-      const tmpfile = join(tmpdir(), 'datatype.xlsx');
-      const expfile = join(__dirname, 'expect/datatype.xlsx');
-      file
-        .saveAs()
-        .pipe(fs.createWriteStream(tmpfile))
-        .on('finish', () => {
-          const expectFile = fs.createReadStream(expfile);
-          const actualFile = fs.createReadStream(tmpfile);
-          streamEqual(expectFile, actualFile, function (err, ok) {
-            expect(err).to.be.null;
-            expect(ok).to.be.true;
-            done();
+        const tmpfile = join(tmpdir(), 'datatype.xlsx');
+        const expfile = join(__dirname, 'expect/datatype.xlsx');
+        file
+          .saveAs()
+          .pipe(fs.createWriteStream(tmpfile))
+          .on('finish', () => {
+            const expectFile = fs.createReadStream(expfile);
+            const actualFile = fs.createReadStream(tmpfile);
+            streamEqual(expectFile, actualFile, function (err, ok) {
+              expect(err).to.be.null;
+              expect(ok).to.be.true;
+              done();
+            });
           });
-        });
-    });
+      });
   });
 });
