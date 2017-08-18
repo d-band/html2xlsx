@@ -1,8 +1,6 @@
 html2xlsx
 ===========
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/d-band/html2xlsx.svg)](https://greenkeeper.io/)
-
 > Transform html to excel (just support xlsx)
 
 [![NPM version](https://img.shields.io/npm/v/html2xlsx.svg)](https://www.npmjs.com/package/html2xlsx)
@@ -10,6 +8,7 @@ html2xlsx
 [![Build Status](https://travis-ci.org/d-band/html2xlsx.svg?branch=master)](https://travis-ci.org/d-band/html2xlsx)
 [![Coverage Status](https://coveralls.io/repos/github/d-band/html2xlsx/badge.svg?branch=master)](https://coveralls.io/github/d-band/html2xlsx?branch=master)
 [![Dependency Status](https://david-dm.org/d-band/html2xlsx.svg)](https://david-dm.org/d-band/html2xlsx)
+[![Greenkeeper badge](https://badges.greenkeeper.io/d-band/html2xlsx.svg)](https://greenkeeper.io/)
 
 ---
 
