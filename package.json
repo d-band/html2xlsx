@@ -66,7 +66,7 @@
   },
   "homepage": "https://github.com/d-band/html2xlsx#readme",
   "dependencies": {
-    "better-xlsx": "^0.4.0",
+    "better-xlsx": "^0.5.0",
     "cheerio": "^1.0.0-rc.1",
     "cssstyle": "^0.2.37",
     "juice": "^4.0.2",
