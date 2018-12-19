@@ -69,7 +69,7 @@
     "better-xlsx": "^0.6.0",
     "cheerio": "^1.0.0-rc.1",
     "cssstyle": "^0.2.37",
-    "juice": "^4.0.2",
+    "juice": "^5.0.0",
     "moment": "^2.17.1",
     "tinycolor2": "^1.4.1"
   }
