@@ -1,6 +1,6 @@
 {
   "name": "html2xlsx",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Transform html to excel (just support xlsx)",
   "main": "lib/index.js",
   "scripts": {
